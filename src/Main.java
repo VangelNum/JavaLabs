@@ -1,7 +1,4 @@
-import java.util.ArrayList;
 
-import Select.Individ.Chromosome;
-import Select.Individ.Individ;
 import Select.Individ.Population;
 
 class Main {

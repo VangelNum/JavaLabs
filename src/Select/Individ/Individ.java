@@ -1,14 +1,16 @@
 package Select.Individ;
-import java.util.Scanner;
 
 public class Individ {
 
     private double [] w = {0, 0, 0};
+
     private  double [] e = {0.0259,0.000772,0.00166};
+
     private double adapt;
     private double procAdapt;
 
-    public double getProcAdapt() {return procAdapt;}
+    public double getProcAdapt() {
+        return procAdapt;}
     public double getAdaptive() {
         return adapt;
     }
@@ -33,7 +35,7 @@ public class Individ {
     }
 
     public void printW(){
-        for(int i = 0;i <3 ; i++){
+        for(int i = 0;i < 3 ; i++){
             System.out.print(w[i] + " ");
         }
     }
