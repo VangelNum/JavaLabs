@@ -1,4 +1,4 @@
-package libraries;
+package lab3;
 
 public class ScientificBook extends Book {
     private double Index;

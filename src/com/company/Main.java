@@ -19,23 +19,23 @@ public class Main {
         var hall1 = new ScientificLibraryHall("test1", new Book[]{book5, book6, book7,
                 book8});
         var library = new ScientificLibrary(2, new int[]{1, 2});
-
-        library.changeHall(0, hall);
-        library.changeHall(1, hall1);
-        library.printAll();
-        hall.changeBook(1, new Book("CHANGED", "CHANGED", 5000, 2021));
-        hall.printAllTitles();
-        hall1.addBook(1, new Book("ADDED", "ADDED", 5000, 2021));
-        hall1.printAllTitles();
-        library.printAll();
-        library.addBook(3, new Book("INSERTED", "INSERTED", 5000, 2021));
-        hall.printAllTitles();
-        library.printAll();
-        System.out.println("BEST BOOK AUTHOR: " + library.getBestBook().getAuthor());
-        var sortedArr = library.getSortedBooksArray();
-        for (int i = 0; i < sortedArr.length; i++) {
-            System.out.print(sortedArr[i].getTitle() + " ");
-        }
-        System.out.println();
+//
+//        library.changeHall(0, hall);
+//        library.changeHall(1, hall1);
+//        library.printAll();
+//        hall.changeBook(1, new Book("CHANGED", "CHANGED", 5000, 2021));
+//        hall.printAllTitles();
+//        hall1.addBook(1, new Book("ADDED", "ADDED", 5000, 2021));
+//        hall1.printAllTitles();
+//        library.printAll();
+//        library.addBook(3, new Book("INSERTED", "INSERTED", 5000, 2021));
+//        hall.printAllTitles();
+//        library.printAll();
+//        System.out.println("BEST BOOK AUTHOR: " + library.getBestBook().getAuthor());
+//        var sortedArr = library.getSortedBooksArray();
+//        for (int i = 0; i < sortedArr.length; i++) {
+//            System.out.print(sortedArr[i].getTitle() + " ");
+//        }
+//        System.out.println();
     }
 }

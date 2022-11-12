@@ -1,5 +1,5 @@
 
-package libraries;
+package lab3;
 
 public class ChildrenBook extends Book {
     private int minAge;

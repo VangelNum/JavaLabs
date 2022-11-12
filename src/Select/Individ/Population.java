@@ -120,26 +120,12 @@ public class Population {
         }
     }
 
-    public void outPar() {
-        for (int i = 0; i < parents.length; i++) {
-            System.out.print(i + " ");
-            parents[i].printW();
-            System.out.println();
-        }
-    }
 
     public void outPop() {
         for (int i = 0; i < size; i++) {
             System.out.print(i + " ");
             population[i].printW();
             System.out.println();
-        }
-    }
-
-    public void outChrom() {
-        for (int i = 0; i < size; i++) {
-            Chromosome ch = new Chromosome(population[i].getWeights());
-            System.out.println(i + " " + ch.getChrom());
         }
     }
 

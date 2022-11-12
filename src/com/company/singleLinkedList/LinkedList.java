@@ -11,6 +11,7 @@ public class LinkedList {
         this.head = new Item();
         this.head.data = null;
         this.head.next = this.head;
+
     }
 
     public int getCount() {

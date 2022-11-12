@@ -1,4 +1,4 @@
-package libraries;
+package lab3;
 
 public class Book {
     private String author;

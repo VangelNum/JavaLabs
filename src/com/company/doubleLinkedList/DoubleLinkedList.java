@@ -13,14 +13,15 @@ public class DoubleLinkedList {
     public void insert(ScientificLibraryHall data) {
         Item newItem = new Item(data);
         this.head = newItem;
+        System.out.println(this.head.data.getBook(0).getAuthor());
         this.tail = newItem;
         this.tail.next = this.head;
         this.tail.prev = this.head;
-//        if (this.head.data == null) {
+//        if (newItem.data == null) {
 //            this.head = newItem;
 //            this.tail = newItem;
 //            this.tail.next = this.head;
-//            this.tail.prev = this.head;
+//            this.tail.prev = head;
 //        } else {
 //            newItem.next = this.head;
 //            this.tail.next = newItem;
@@ -49,8 +50,8 @@ public class DoubleLinkedList {
         }
     }
     private void tailReset() {
-        Item tmp = this.head;
-        tail = tmp.prev;
+         Item tmp = this.head;
+         tail = tmp.prev;
     }
     public void deleteAt(int position) {
         Item current = this.head;
