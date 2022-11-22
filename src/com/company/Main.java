@@ -31,7 +31,7 @@ public class Main {
 //        library.addBook(3, new Book("INSERTED", "INSERTED", 5000, 2021));
 //        hall.printAllTitles();
 //        library.printAll();
-//        System.out.println("BEST BOOK AUTHOR: " + library.getBestBook().getAuthor());
+//        System.out.println("BEST BOOK AUTHOR: " + library.getBestBook().getAvtor());
 //        var sortedArr = library.getSortedBooksArray();
 //        for (int i = 0; i < sortedArr.length; i++) {
 //            System.out.print(sortedArr[i].getTitle() + " ");
