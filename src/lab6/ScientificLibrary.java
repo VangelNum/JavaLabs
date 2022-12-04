@@ -1,6 +1,9 @@
-package lab5;
+package lab6;
 
-import lab5.exception.HallIndexOutOfBoundsException;
+import lab6.exception.BookIndexOutOfBoundsException;
+import lab6.exception.HallIndexOutOfBoundsException;
+
+import java.util.Objects;
 
 public class ScientificLibrary implements ILibrary {
     private Item2 head;
@@ -9,18 +12,18 @@ public class ScientificLibrary implements ILibrary {
         if (numberOfHalls == 0) {
             head = null;
         } else if (numberOfHalls == 1) {
-            head = new Item2("unknown", sizeBooksInHall[0]);
-            head.next = head; // зациклили
+            head = new Item2("new", sizeBooksInHall[0]);
+            head.next = head;
             head.prev = head;
         } else if (numberOfHalls > 1) {
-            head = new Item2("unknown", sizeBooksInHall[0]);
+            head = new Item2("new", sizeBooksInHall[0]);
             head.next = head;
             head.prev = head;
             Item2 temp = head;
             Item2 oldTemp;
             Item2 newTemp;
             for (int i = 1; i < numberOfHalls; i++) {
-                newTemp = new Item2("unknown", sizeBooksInHall[i]);
+                newTemp = new Item2("new", sizeBooksInHall[i]);
                 temp.next = newTemp;
                 head.prev = newTemp;
                 oldTemp = temp;
@@ -37,7 +40,7 @@ public class ScientificLibrary implements ILibrary {
             head = null;
         } else if (numberOfHalls == 1) {
             head = new Item2(libraryHall[0]);
-            head.next = head; // зациклили
+            head.next = head;
             head.prev = head;
         } else {
             head = new Item2(libraryHall[0]);
@@ -85,7 +88,7 @@ public class ScientificLibrary implements ILibrary {
         int numBook = 0;
         Item2 temp = head;
         for (int i = 0; i < getNumHall(); i++) {
-            numBook += temp.data.numbersOfBooks();
+            numBook += temp.data.numbersBooks();
             temp = temp.next;
         }
         return numBook;
@@ -94,8 +97,8 @@ public class ScientificLibrary implements ILibrary {
     public int getNumHall(IHall hall) {
         int numBook = 0;
         Item2 temp = head;
-        for (int i = 0; i < hall.numbersOfBooks(); i++) {
-            numBook += temp.data.numbersOfBooks();
+        for (int i = 0; i < hall.numbersBooks(); i++) {
+            numBook += temp.data.numbersBooks();
             temp = temp.next;
         }
         return numBook;
@@ -112,7 +115,7 @@ public class ScientificLibrary implements ILibrary {
     }
 
     @Override
-    public IHall[] getArrayHalls() {
+    public IHall[] arrHall() {
         IHall[] iHall = new IHall[getNumHall()];
         Item2 temp = head;
         for (int i = 0; i < getNumHall(); i++) {
@@ -122,7 +125,7 @@ public class ScientificLibrary implements ILibrary {
     }
 
     public IHall getHall(int i) {
-        return new ScientificLibraryHall(getLinkToHall(i).data.getName(), getLinkToHall(i).data.numbersOfBooks());
+        return new ScientificLibraryHall(getLinkToHall(i).data.getName(), getLinkToHall(i).data.numbersBooks());
     }
 
     public IBook getBook(int i) {
@@ -247,12 +250,23 @@ public class ScientificLibrary implements ILibrary {
     public void print() {
         Item2 item2 = head;
         for (int i = 0; i < getNumHall(); i++) {
-            System.out.println("Name hall: " + item2.data.getName() + ", number of books = " + item2.data.numbersOfBooks());
+            System.out.println("Name hall: " + item2.data.getName() + ", number of books = " + item2.data.numbersBooks());
             item2 = item2.next;
         }
     }
 
-    public void changeHall(int i, IHall newHall) {
+    public String getInfoFromHoll() {
+        StringBuilder str = new StringBuilder();
+        Item2 item2 = head;
+        for (int i = 0; i < getNumHall(); i++) {
+            str.append(" Название зала: ").append(item2.data.getName());
+            str.append("Количество книг: ").append(item2.data.numbersBooks());
+            item2 = item2.next;
+        }
+        return str.toString();
+    }
+
+    public void zamenaHoll(int i, IHall newHall) {
         if (!isIndex(i) || isEmpty()) throw new HallIndexOutOfBoundsException(i);
         Item2 hall = new Item2(newHall);
         Item2 temp = head;
@@ -267,19 +281,19 @@ public class ScientificLibrary implements ILibrary {
 
 
     @Override
-    public void changeBook(int i, IBook newBook) {
-        if (isIndex(i)) getLinkToHall(i).data.changeBook(i, newBook);
+    public void zamenaBook(int i, IBook newBook) {
+        if (isIndex(i)) getLinkToHall(i).data.izmenenie(i, newBook);
     }
 
 
-    public void addBook(int i, IBook newBook) {
-        if (isIndex(i)) getLinkToHall(i).data.addBook(i, newBook);
+    public void add(int i, IBook newBook) {
+        if (isIndex(i)) getLinkToHall(i).data.dobavBook(i, newBook);
         else throw new HallIndexOutOfBoundsException(i);
     }
 
 
-    public void deleteBook(int i) {
-        if (isIndex(i)) getLinkToHall(i).data.delBook(i);
+    public void DELETEBook(int i) {
+        if (isIndex(i)) getLinkToHall(i).data.delete(i);
     }
 
 
@@ -295,7 +309,7 @@ public class ScientificLibrary implements ILibrary {
         return bestBook;
     }
 
-    public IBook[] getSort() {
+    public IBook[] sort() {
         IBook[] books = new ScientificBook[getNumBooks()];
         IBook temp;
         for (int i = 0; i < books.length; i++) {
@@ -314,6 +328,41 @@ public class ScientificLibrary implements ILibrary {
     }
 
     public boolean isIndex(int i) {
-        return i >= 0 && i < getNumHall();
+        if (i >= 0 && i < getNumHall()) {
+            return true;
+        }
+       throw new BookIndexOutOfBoundsException(i);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append("Количество залов: ").append(getNumHall()).append(" ");
+        str.append(getInfoFromHoll());
+        return str.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getInfoFromHoll());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        ScientificLibrary MyLibrary = (ScientificLibrary) obj;
+
+        if (MyLibrary.getNumHall() == this.getNumHall()
+                && MyLibrary.getInfoFromHoll().equals(this.getInfoFromHoll())
+        ) {
+            return true;
+        } else return false;
+
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

@@ -1,6 +1,8 @@
-package lab5;
+package lab6;
 
-import lab5.exception.BookIndexOutOfBoundsException;
+import lab6.exception.BookIndexOutOfBoundsException;
+
+import java.util.Objects;
 
 public class ScientificLibraryHall implements IHall {
     private Item head;
@@ -14,15 +16,13 @@ public class ScientificLibraryHall implements IHall {
         hallName = newhallName;
     }
 
-    //---------------конструкторы-----------------------------//
-    //--------------------------------------------------------//
     public ScientificLibraryHall(String hallName, int numberOfBooks) {
-        setName(hallName);
+        this.hallName = hallName;
         if (numberOfBooks == 0) {
             head = null;
         } else if (numberOfBooks == 1) {
             head = new Item();
-            head.next = head; // зациклили
+            head.next = head;
         } else if (numberOfBooks > 1) {
             head = new Item();
             head.next = head;
@@ -38,7 +38,7 @@ public class ScientificLibraryHall implements IHall {
     }
 
     public ScientificLibraryHall(String hallName, IBook[] hall) {
-        if (hall == null) throw new NullPointerException("Array is null in second constructor");
+        if (hall == null) throw new NullPointerException("Array is null");
         setName(hallName);
         setBooks(hall);
         int numberOfBooks = hall.length;
@@ -46,8 +46,8 @@ public class ScientificLibraryHall implements IHall {
             head = null;
         } else if (numberOfBooks == 1) {
             head = new Item(hall[0]);
-            head.next = head; // зациклили
-        } else if (numberOfBooks > 1) {
+            head.next = head;
+        } else {
             head = new Item(hall[0]);
             head.next = head;
             Item temp = head;
@@ -61,62 +61,9 @@ public class ScientificLibraryHall implements IHall {
         }
     }
 
-    //------------------методы--------------------------------//
-//--------------------------------------------------------//
-// isEmpty() – пустой список или нет
-    public boolean isEmpty() {
-        return head == null;
-    }
 
-    // возвращающий количество элементов
-    public int getNumberOfElements() {
-        int count = 0;
-        if (isEmpty()) {
-            return count;
-        }
-        Item temp = head;
-        temp = temp.next;
-        count++;
-        if (temp == head) return count;
-        else {
-            while (temp != head) {
-                temp = temp.next;
-                count++;
-            }
-            return count;
-        }
-    }
-
-    // возвращающий ссылку на элемент по номеру (возвращает null, если элемент не найден)
-    public Item getLinkToElement(int i) {
-        if (!isIndex(i) || isEmpty()) return null;
-        Item element = null;
-        if (isEmpty()) return null;
-        else if (i == 0) return head;
-        else if (i == 1 && head.next != head) {
-            return head.next;
-        } else if (head.next == head) return null;
-        else {
-            Item temp = head;
-            temp = temp.next;
-            for (int j = 1; j < i && temp != head; j++) {
-                if (j + 1 == i) {
-                    element = temp.next;
-                    break;
-                }
-                temp = temp.next;
-                if (temp == head) return null;
-            }
-        }
-        return element;
-    }
-
-    // добавление элемента по заданному номеру возвращает (true/false).
-    // При добавлении первого элемента, список замыкается в кольцо.
     @Override
-    public void addBook(int i, IBook newBook) {
-        // if (isEmpty()) throw new BookIndexOutOfBoundsException(i);
-        // if (isIndex(i)) throw new BookIndexOutOfBoundsException(i);
+    public void dobavBook(int i, IBook newBook) {
         Item newBooks = new Item(newBook);
         Item temp = head;
         if (isEmpty() && i == 0) {
@@ -146,11 +93,8 @@ public class ScientificLibraryHall implements IHall {
         }
     }
 
-    // удаление элемента по заданному номеру возвращает (true/false).
-    // При удалении последнего элемента (кроме головы) список должен размыкаться
-    // (ссылку на следующий элемент головы установить равной null).
     @Override
-    public void delBook(int i) {
+    public void delete(int i) {
         if (!isIndex(i) || isEmpty()) throw new BookIndexOutOfBoundsException(i);
         Item temp = head;
         Item second = null;
@@ -184,9 +128,8 @@ public class ScientificLibraryHall implements IHall {
         }
     }
 
-    // замена книги
     @Override
-    public void changeBook(int i, IBook newBook) {
+    public void izmenenie(int i, IBook newBook) {
         if (isEmpty() || getNumberOfElements() <= i) throw new BookIndexOutOfBoundsException(i);
         int j = 0;
         Item temp = head;
@@ -204,7 +147,56 @@ public class ScientificLibraryHall implements IHall {
         }
     }
 
-    // вывод имени всех книг
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+
+    public int getNumberOfElements() {
+        int count = 0;
+        if (isEmpty()) {
+            return count;
+        }
+        Item temp = head;
+        temp = temp.next;
+        count++;
+        if (temp == head) return count;
+        else {
+            while (temp != head) {
+                temp = temp.next;
+                count++;
+            }
+            return count;
+        }
+    }
+
+
+    public Item getLink(int i) {
+        if (!isIndex(i) || isEmpty()) return null;
+        Item element = null;
+        if (isEmpty()) return null;
+        else if (i == 0) return head;
+        else if (i == 1 && head.next != head) {
+            return head.next;
+        } else if (head.next == head) return null;
+        else {
+            Item temp = head;
+            temp = temp.next;
+            for (int j = 1; j < i && temp != head; j++) {
+                if (j + 1 == i) {
+                    element = temp.next;
+                    break;
+                }
+                temp = temp.next;
+                if (temp == head) return null;
+            }
+        }
+        return element;
+    }
+
+
+
     @Override
     public void print() {
         System.out.println(getName());
@@ -214,16 +206,22 @@ public class ScientificLibraryHall implements IHall {
             temp = temp.next;
         }
     }
-    public void printAllBooks() {
-        System.out.println(getName());
+
+    public String printAllBooks() {
+        StringBuilder str = new StringBuilder();
         Item temp = head;
         for (int i = 0; i < getNumberOfElements(); i++) {
-            System.out.println(temp.data.getTitle());
+            str.append("Автор: ").append(temp.data.getAvtor());
+            str.append(" Название книги: ").append(temp.data.getTitle());
+            str.append(" Индекс цитируемости: ").append(temp.data.getYear());
+            str.append(" Цена: ").append(temp.data.getCost());
+            str.append(" ");
             temp = temp.next;
         }
+        return str.toString();
     }
 
-    // общая стоимость
+
     public double getSumPrice() {
         Item temp = head;
         double sum = 0;
@@ -236,31 +234,65 @@ public class ScientificLibraryHall implements IHall {
 
     @Override
     public IBook getBook(int i) {
-        return getLinkToElement(i).data;
+        return getLink(i).data;
     }
 
-    // получение лучшей книги
     public IBook getBestBook() {
         if (isEmpty()) throw new BookIndexOutOfBoundsException("Hall is empty");
         int max = 0;
-        for (int i = 1; i < numbersOfBooks(); i++) {
+        for (int i = 1; i < numbersBooks(); i++) {
             if (getBook(i).getCost() > getBook(max).getCost()) max = i;
         }
         return getBook(max);
     }
 
-    // ---------------помощь-------------------
     public boolean isIndex(int i) {
-        return i >= 0 && i < getNumberOfElements();
+        if (i >= 0 && i < getNumberOfElements()) {
+            return true;
+        } else throw new BookIndexOutOfBoundsException();
     }
 
     public void setBooks(IBook[] books) {
         for (int i = 0; i < books.length; i++) {
-            addBook(i, books[i]);
+            dobavBook(i, books[i]);
         }
     }
 
-    public int numbersOfBooks() {
+    public int numbersBooks() {
         return getNumberOfElements();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append("Тип зала: ").append(getName());
+        str.append(" Количество книг: ").append(getNumberOfElements());
+        str.append(" Информация по каждой книге: ").append(printAllBooks());
+        return str.toString();
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(head, hallName);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        ScientificLibraryHall MyHall = (ScientificLibraryHall) obj;
+
+        if (MyHall.getNumberOfElements() == this.getNumberOfElements()
+                && MyHall.printAllBooks().equals(this.printAllBooks())
+        ) {
+            return true;
+        } else return false;
+
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

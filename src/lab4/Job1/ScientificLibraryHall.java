@@ -4,7 +4,7 @@ public class ScientificLibraryHall {
 
     private Item head;
     String hallName;
-    
+
     public void setHallName(String hallName) {
         this.hallName = hallName;
     }
@@ -106,26 +106,21 @@ public class ScientificLibraryHall {
 
     public void changeBook(int indexOfElement, ScientificLibrary newValue) {
         if (isEmpty()) return;
-        getLinkToElement(indexOfElement).data.setAuthor(newValue.getAuthor());
-        getLinkToElement(indexOfElement).data.setName(newValue.getName());
-        getLinkToElement(indexOfElement).data.setPrice(newValue.getPrice());
-        getLinkToElement(indexOfElement).data.setYear(newValue.getYear());
-        getLinkToElement(indexOfElement).data.setIndex(newValue.getIndex());
+        Item temp = getLinkToElement(indexOfElement);
+        temp.data.setAuthor(newValue.getAuthor());
+        temp.data.setName(newValue.getName());
+        temp.data.setPrice(newValue.getPrice());
+        temp.data.setYear(newValue.getYear());
+        temp.data.setIndex(newValue.getIndex());
     }
 
     public boolean addBook(int i, ScientificLibrary newBook) {
         if (isEmpty()) return true;
         boolean flag = false;
         Item newBooks = new Item(newBook);
-
         Item temp = head;
 
-        if (getnumberofbook() == 1) {
-            head.next = newBooks;
-            newBooks.next = head;
-            head = newBooks;
-            flag = true;
-        } else if (isEmpty()) {
+      if (isEmpty()) {
             head = newBooks;
             head.next = head;
             flag = true;
@@ -158,11 +153,7 @@ public class ScientificLibraryHall {
         boolean flag = false;
         Item temp = head;
         Item second;
-        if (getnumberofbook() == 1) {
-            head = null;
-            head.next = null;
-            flag = true;
-        } else if (i == 0) {
+        if (i == 0) {
             second = temp.next;
             temp = temp.next;
             while (temp.next != head) {
@@ -170,13 +161,6 @@ public class ScientificLibraryHall {
             }
             temp.next = second;
             head = second;
-            flag = true;
-        } else if (i == getnumberofbook()) {
-            temp = temp.next;
-            while (temp.next.next != head) {
-                temp = temp.next;
-            }
-            temp.next = null;
             flag = true;
         } else {
             for (int j = 0; j < getnumberofbook(); j++) {

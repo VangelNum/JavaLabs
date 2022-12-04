@@ -1,6 +1,9 @@
-package lab5;
+package lab6;
 
-import lab5.exception.BookIndexOutOfBoundsException;
+import lab6.exception.BookIndexOutOfBoundsException;
+
+import java.util.Arrays;
+import java.util.Objects;
 
 public class ChildrenLibraryHall implements IHall {
     private String name;
@@ -39,7 +42,7 @@ public class ChildrenLibraryHall implements IHall {
         return books.length;
     }
 
-    public int numbersOfBooks() {
+    public int numbersBooks() {
         return books.length;
     }
 
@@ -60,13 +63,13 @@ public class ChildrenLibraryHall implements IHall {
         return sum;
     }
 
-    public void nameBooks() {
+    public void nameBook() {
         for (int i = 0; i < getNumBook(); i++) {
             System.out.println(books[i].getTitle());
         }
     }
 
-    public double allCoast() {
+    public double Cost() {
         double coast = 0.0;
         for (int i = 0; i < books.length; i++) {
             coast += books[i].getCost();
@@ -75,48 +78,58 @@ public class ChildrenLibraryHall implements IHall {
     }
 
     private boolean isIndex(int i) {
-        return books != null && i >= 0 && i < books.length;
+        if (books != null && i >= 0 && i < books.length) {
+            return true;
+        }
+        throw new BookIndexOutOfBoundsException(i);
     }
 
     @Override
     public IBook getBook(int i) {
         if (isIndex(i)) {
             return books[i];
-        } else return null;
+        }
+        return null;
     }
 
     @Override
-    public void changeBook(int i, IBook newBook) {
+    public void izmenenie(int i, IBook newBook) {
         if (isIndex(i)) {
             books[i] = newBook;
-        } else throw new BookIndexOutOfBoundsException(i);
+        }
     }
 
     @Override
-    public void addBook(int i, IBook book) {
-        IBook[] newBooks = new ChildrenBook[books.length + 1];
-        for (int j = 0; j < i; j++) {
-            newBooks[j] = books[j];
+    public void dobavBook(int i, IBook book) {
+        try {
+            IBook[] newBooks = new ChildrenBook[books.length + 1];
+            for (int j = 0; j < i; j++) {
+                newBooks[j] = books[j];
+            }
+            newBooks[i] = book;
+            for (int j = i; j < books.length; j++) {
+                newBooks[j + 1] = books[j];
+            }
+            books = newBooks;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
         }
-        newBooks[i] = book;
-        for (int j = i; j < books.length; j++) {
-            newBooks[j + 1] = books[j];
-        }
-        books = newBooks;
     }
 
     @Override
-    public void delBook(int i) {
-        if (isIndex(i)) {
+    public void delete(int k) {
+        try {
             int size = books.length - 1;
             IBook[] copy = new ChildrenBook[size];
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j < k; j++) {
                 copy[j] = books[j];
             }
-            for (int j = i + 1; j <= size; j++) {
+            for (int j = k + 1; j <= size; j++) {
                 copy[j - 1] = books[j];
             }
             this.books = copy;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -134,4 +147,37 @@ public class ChildrenLibraryHall implements IHall {
         return books[n];
     }
 
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append("Тип зала: ").append(getName());
+        str.append(" Количество книг: ").append(getNumBook());
+        str.append(" Информация по каждой книге: ").append(Arrays.toString(getBooks()));
+        return str.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getName());
+        result = 31 * result + Arrays.hashCode(getBooks());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        ChildrenLibraryHall MyHall = (ChildrenLibraryHall) obj;
+
+        if (MyHall.getNumBook() == this.getNumBook()
+                && Arrays.equals(MyHall.getBooks(), this.getBooks())
+        ) {
+            return true;
+        } else return false;
+
+    }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

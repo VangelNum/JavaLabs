@@ -6,8 +6,7 @@ public class ChildrenLibrary {
     public ChildrenLibrary(int amount, int[] booksAmountArr) {
         this.halls = new ChildrenLibraryHall[amount];
         for (int i = 0; i < amount; i++) {
-            this.halls[i] = new ChildrenLibraryHall("Не определено",
-                    booksAmountArr[i]);
+            this.halls[i] = new ChildrenLibraryHall("Не определено", booksAmountArr[i]);
         }
     }
     public ChildrenLibrary(ChildrenLibraryHall[] halls) {

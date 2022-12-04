@@ -1,7 +1,7 @@
-package lab5.exception;
+package lab6.exception;
 
 public class HallIndexOutOfBoundsException extends IndexOutOfBoundsException{
     public HallIndexOutOfBoundsException(int i) {
-        System.out.println("Выход за границы номера зала" + i);
+        super(i);
     }
 }
