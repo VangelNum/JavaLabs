@@ -28,6 +28,6 @@ public interface ILibrary extends Cloneable {
     public IBook getBestBook();
 
     public boolean isEmpty();
-    public Object clone() throws CloneNotSupportedException;
+    public Object clone();
 
 }

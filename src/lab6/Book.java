@@ -92,6 +92,15 @@ public class Book implements IBook {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+        Object result = null;
+        try
+        {
+            result = super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        return result;
     }
 }

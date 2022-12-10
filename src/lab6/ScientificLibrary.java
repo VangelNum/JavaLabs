@@ -362,7 +362,20 @@ public class ScientificLibrary implements ILibrary {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Object clone(){
+        Object result = null;
+
+        try {
+            result = super.clone();
+            ((ScientificLibrary) result).head = (Item2) head.clone();
+            for (int i = 0; i < getNumHall(); i++) {
+                ((ScientificLibrary) result).zamenaHoll(i, (IHall) getHall(i).clone());
+            }
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
+
+
 }

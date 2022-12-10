@@ -176,8 +176,16 @@ public class ChildrenLibraryHall implements IHall {
         } else return false;
 
     }
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Object clone(){
+        Object result = null;
+        try
+        {
+            result = super.clone();
+            ((ChildrenLibraryHall) result).books = new IBook[numbersBooks()];
+            for (int i = 0; i < numbersBooks(); i++) {
+                ((ChildrenLibraryHall) result).books[i] = (IBook) books[i].clone();
+            }
+        }catch (Exception e){}
+        return result;
     }
 }

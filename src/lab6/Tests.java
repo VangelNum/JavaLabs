@@ -15,20 +15,24 @@ public class Tests {
         ChildrenBook newChildrenBook4 = new ChildrenBook("Лев Толстой", "Война и мир", 9618, 1865, 8);
 
         ScientificLibraryHall hall1 = new ScientificLibraryHall("Зал 1 Научный", 0);
-        ChildrenLibraryHall hall2 = new ChildrenLibraryHall("Зал 2 Детский", 0);
-        ChildrenLibraryHall hall3 = new ChildrenLibraryHall("Зал 3 Детский", 0);
+        ScientificLibraryHall hall4 = new ScientificLibraryHall("Зал 2 Научный", 0);
+        ChildrenLibraryHall hall2 = new ChildrenLibraryHall("Зал 3 Детский", 0);
+        ChildrenLibraryHall hall3 = new ChildrenLibraryHall("Зал 4 Детский", 0);
 
         ChildrenLibrary library1 = new ChildrenLibrary(new IHall[]{hall2,hall3});
-        ScientificLibrary library2 = new ScientificLibrary(new IHall[]{hall1});
+        ScientificLibrary library2 = new ScientificLibrary(new IHall[]{hall1,hall4});
 
         hall1.dobavBook(0, newBook1);
         hall1.dobavBook(0, newBook2);
         hall1.dobavBook(0, newBook3);
+        hall4.dobavBook(0,newBook4);
+        hall4.dobavBook(0,newBook3);
 
         hall2.dobavBook(0, newChildrenBook1);
         hall2.dobavBook(0, newChildrenBook2);
 
         hall3.dobavBook(0, newChildrenBook4);
+        hall3.dobavBook(0, newChildrenBook1);
 
         System.out.println("Добавление книг");
 
@@ -54,17 +58,35 @@ public class Tests {
         System.out.println("check7");
         System.out.println(library2); //научная библиотека
 
+//
+//        if (StandardBook2.equals(StandardBook3)) {
+//            System.out.println("YEP");
+//        } else System.out.println("NO");
 
-        if (StandardBook2.equals(StandardBook3)) {
-            System.out.println("YEP");
-        } else System.out.println("NO");
+//        if (StandardBook2.hashCode() == StandardBook3.hashCode()) {
+//            System.out.println("YEP");
+//        } else System.out.println("NO");
 
-        if (StandardBook2.hashCode() == StandardBook3.hashCode()) {
-            System.out.println("YEP");
-        } else System.out.println("NO");
+
 
 
         Book clone = (Book) StandardBook4.clone();
+
+        System.out.println("library1" + library2);
+        ScientificLibrary clone2 = (ScientificLibrary) library2.clone();
+
+
+        clone2.add(0,newChildrenBook1);
+
+        System.out.println("library1" + library2);
+
+        System.out.println("clone2" + clone2);
+
+
+        if (clone2.equals(library2)) {
+            System.out.println("YEEES");
+        } else System.out.println("NOOO");
+
 
         System.out.println(clone + " Клон");
 

@@ -61,6 +61,9 @@ public class ChildrenBook extends Book {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+        Object result = null;
+        result = super.clone();
+        return result;
     }
+
 }

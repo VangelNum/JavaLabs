@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class ScientificLibraryHall implements IHall {
     private Item head;
+    private Item next;
     String hallName;
 
     public String getName() {
@@ -196,7 +197,6 @@ public class ScientificLibraryHall implements IHall {
     }
 
 
-
     @Override
     public void print() {
         System.out.println(getName());
@@ -291,8 +291,20 @@ public class ScientificLibraryHall implements IHall {
 
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+
+    public Object clone() {
+
+        Object result = null;
+        try {
+            result = super.clone();
+            ((ScientificLibraryHall) result).head = (Item) head.clone();
+            ((ScientificLibraryHall) result).next = (Item) next.clone();
+            for (int i = 0; i < numbersBooks(); i++) {
+                ((ScientificLibraryHall) result).izmenenie(i, (IBook) getBook(i).clone());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

@@ -10,6 +10,10 @@ import java.util.Objects;
 public class ChildrenLibrary implements ILibrary {
     IHall[] libHall;
 
+    public ChildrenLibrary() {
+
+    }
+
     public IHall[] getLibHall() {
         return libHall;
     }
@@ -192,7 +196,6 @@ public class ChildrenLibrary implements ILibrary {
         if (this == obj) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         ChildrenLibrary MyLibrary = (ChildrenLibrary) obj;
-
         if (MyLibrary.getLibHall().length == this.getLibHall().length
                 && Arrays.equals(MyLibrary.getLibHall(), this.getLibHall())
         ) {
@@ -201,8 +204,18 @@ public class ChildrenLibrary implements ILibrary {
 
     }
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Object clone() {
+        Object result = null;
+        try {
+            result = super.clone();
+            ((ChildrenLibrary) result).libHall = new IHall[getNumHall()];
+            for (int i = 0; i < getNumHall(); i++) {
+                ((ChildrenLibrary) result).libHall[i] = (IHall) libHall[i].clone();
+            }
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }
