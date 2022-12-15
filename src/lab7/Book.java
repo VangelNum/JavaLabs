@@ -1,10 +1,11 @@
-package lab6;
+package lab7;
 
-import lab6.exception.InvalidBookPriceException;
+import lab7.exception.InvalidBookPriceException;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Book implements IBook {
+public class Book implements IBook, Serializable {
     private String avtor, title;
     private double cost;
     private int year;

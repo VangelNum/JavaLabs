@@ -1,11 +1,12 @@
-package lab6;
+package lab7;
 
-import lab6.exception.BookIndexOutOfBoundsException;
+import lab7.exception.BookIndexOutOfBoundsException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ChildrenLibraryHall implements IHall {
+public class ChildrenLibraryHall implements IHall, Serializable {
     private String name;
     private IBook[] books;
 

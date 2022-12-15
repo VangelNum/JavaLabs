@@ -1,4 +1,4 @@
-package lab6.exception;
+package lab7.exception;
 
 public class BookIndexOutOfBoundsException extends IndexOutOfBoundsException {
     public BookIndexOutOfBoundsException(int i){

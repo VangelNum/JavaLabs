@@ -1,6 +1,8 @@
-package lab6;
+package lab7;
 
-public class Item implements Cloneable {
+import java.io.Serializable;
+
+public class Item implements Cloneable, Serializable {
     public IBook data;
     public Item next;
 

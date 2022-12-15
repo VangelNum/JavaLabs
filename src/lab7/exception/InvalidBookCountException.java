@@ -1,4 +1,4 @@
-package lab6.exception;
+package lab7.exception;
 
 public class InvalidBookCountException extends IllegalArgumentException {
     public InvalidBookCountException() {

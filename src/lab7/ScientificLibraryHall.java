@@ -1,10 +1,11 @@
-package lab6;
+package lab7;
 
-import lab6.exception.BookIndexOutOfBoundsException;
+import lab7.exception.BookIndexOutOfBoundsException;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ScientificLibraryHall implements IHall {
+public class ScientificLibraryHall implements IHall, Serializable {
     private Item head;
     String hallName;
 
@@ -196,7 +197,6 @@ public class ScientificLibraryHall implements IHall {
     }
 
 
-
     @Override
     public void print() {
         System.out.println(getHallName());
@@ -302,7 +302,8 @@ public class ScientificLibraryHall implements IHall {
             for (int i = 0; i < getNumberOfElements(); i++) {
                 ((ScientificLibraryHall) result).dobavBook(i, (IBook) getBook(i).clone());
             }
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
         return result;
     }
 

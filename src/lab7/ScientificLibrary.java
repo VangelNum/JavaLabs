@@ -1,11 +1,12 @@
-package lab6;
+package lab7;
 
-import lab6.exception.BookIndexOutOfBoundsException;
-import lab6.exception.HallIndexOutOfBoundsException;
+import lab7.exception.BookIndexOutOfBoundsException;
+import lab7.exception.HallIndexOutOfBoundsException;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ScientificLibrary implements ILibrary {
+public class ScientificLibrary implements ILibrary, Serializable {
     private Item2 head;
 
     public ScientificLibrary(int numberOfHalls, int[] sizeBooksInHall) {

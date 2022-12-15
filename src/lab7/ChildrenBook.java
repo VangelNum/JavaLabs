@@ -1,8 +1,9 @@
-package lab6;
+package lab7;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ChildrenBook extends Book {
+public class ChildrenBook extends Book implements Serializable {
     private int vozr;
 
     public int getVozr() {

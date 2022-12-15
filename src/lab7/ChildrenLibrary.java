@@ -1,13 +1,14 @@
-package lab6;
+package lab7;
 
-import lab6.exception.BookIndexOutOfBoundsException;
-import lab6.exception.HallIndexOutOfBoundsException;
-import lab6.exception.InvalidBookCountException;
+import lab7.exception.BookIndexOutOfBoundsException;
+import lab7.exception.HallIndexOutOfBoundsException;
+import lab7.exception.InvalidBookCountException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ChildrenLibrary implements ILibrary {
+public class ChildrenLibrary implements ILibrary, Serializable {
     IHall[] libHall;
 
     public ChildrenLibrary() {

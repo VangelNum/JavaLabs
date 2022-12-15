@@ -1,8 +1,9 @@
-package lab6;
+package lab7;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ScientificBook extends Book {
+public class ScientificBook extends Book implements Serializable {
     private double index;
 
     public double getIndex() {

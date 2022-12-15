@@ -1,4 +1,4 @@
-package lab6.exception;
+package lab7.exception;
 
 public class InvalidBookPriceException extends IllegalArgumentException {
     public InvalidBookPriceException() {

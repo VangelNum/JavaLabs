@@ -1,6 +1,8 @@
-package lab6;
+package lab7;
 
-public interface ILibrary extends Cloneable {
+import java.io.Serializable;
+
+public interface ILibrary extends Cloneable, Serializable {
     public int getNumHall();
 
     public int getNumBooks();

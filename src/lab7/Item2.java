@@ -1,6 +1,8 @@
-package lab6;
+package lab7;
 
-public class Item2 {
+import java.io.Serializable;
+
+public class Item2 implements Serializable {
     public IHall data;
     public Item2 prev;
     public Item2 next;

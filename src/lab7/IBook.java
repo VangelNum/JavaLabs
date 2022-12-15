@@ -1,6 +1,8 @@
-package lab6;
+package lab7;
 
-public interface IBook extends Cloneable{
+import java.io.Serializable;
+
+public interface IBook extends Cloneable, Serializable {
     public String getAvtor();
 
     public void setAvtor(String avtor);

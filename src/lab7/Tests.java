@@ -1,24 +1,24 @@
-package lab6;
+package lab7;
 
 
 import java.io.*;
 
 public class Tests {
     public static void main(String[] args) throws CloneNotSupportedException, IOException {
-        ScientificBook newBook1 = new ScientificBook("Ivan Turgenev", "Father and children", 6264, 1860, 1);
-        ScientificBook newBook2 = new ScientificBook("Fedor Dostoevskiy", "Idiot", 7192, 1868, 2);
-        ScientificBook newBook3 = new ScientificBook("Mihail Bulgakov", "Dog hearth", 9695, 1925, 3);
-        ScientificBook newBook4 = new ScientificBook("Viktor Gugo", "Outcasts", 5475, 1862, 4);
+        ScientificBook newBook1 = new ScientificBook("IvanTurgenev", "FatherAndChildren", 6264, 1860, 1);
+        ScientificBook newBook2 = new ScientificBook("FedorDostoevskiy", "Idiot", 7192, 1868, 2);
+        ScientificBook newBook3 = new ScientificBook("MihailBulgakov", "Doghearth", 9695, 1925, 3);
+        ScientificBook newBook4 = new ScientificBook("ViktorGugo", "Outcasts", 5475, 1862, 4);
 
-        ChildrenBook newChildrenBook1 = new ChildrenBook("Nikolay Gogol", "Auditor", 5542, 1836, 5);
-        ChildrenBook newChildrenBook2 = new ChildrenBook("Anton Chehov", "Ward №6", 5123, 1892, 6);
-        ChildrenBook newChildrenBook3 = new ChildrenBook("Gogol Nikolay", "Dead Souls", 7536, 1842, 7);
-        ChildrenBook newChildrenBook4 = new ChildrenBook("Lev Tolstoi", "War and Peace", 9618, 1865, 8);
+        ChildrenBook newChildrenBook1 = new ChildrenBook("NikolayGogol", "Auditor", 5542, 1836, 5);
+        ChildrenBook newChildrenBook2 = new ChildrenBook("AntonChehov", "Ward№6", 5123, 1892, 6);
+        ChildrenBook newChildrenBook3 = new ChildrenBook("GogolNikolay", "DeadSouls", 7536, 1842, 7);
+        ChildrenBook newChildrenBook4 = new ChildrenBook("LevTolstoi", "WarAndPeace", 9618, 1865, 8);
 
-        ScientificLibraryHall hall1 = new ScientificLibraryHall("Hall 1 Scientific", 0);
-        ScientificLibraryHall hall4 = new ScientificLibraryHall("Hall 2 Scientific", 0);
-        ChildrenLibraryHall hall2 = new ChildrenLibraryHall("Hall 3 Children", 0);
-        ChildrenLibraryHall hall3 = new ChildrenLibraryHall("Hall 4 Children", 0);
+        ScientificLibraryHall hall1 = new ScientificLibraryHall("Hall1Scientific", 0);
+        ScientificLibraryHall hall4 = new ScientificLibraryHall("Hall2Scientific", 0);
+        ChildrenLibraryHall hall2 = new ChildrenLibraryHall("Hall3Children", 0);
+        ChildrenLibraryHall hall3 = new ChildrenLibraryHall("Hall4Children", 0);
 
         ChildrenLibrary library1 = new ChildrenLibrary(new IHall[]{hall2,hall3});
         ScientificLibrary library2 = new ScientificLibrary(new IHall[]{hall1,hall4});
@@ -45,6 +45,25 @@ public class Tests {
         ILibrary libr1 = libr.inputLibrary(in1);
         libr1.print();
         in1.close();
+
+        PrintWriter out2 = new PrintWriter(new BufferedWriter(new FileWriter("out2.txt")));
+        libr.writeLibrary(library1, out2);
+        out2.close();
+
+        FileReader in2 = new FileReader(("out2.txt"));
+        libr.readLibrary(in2);
+        in2.close();
+
+        ObjectOutputStream out3 = new ObjectOutputStream(new FileOutputStream("out3.bin"));
+        libr.SerOutLib(library1, out3);
+        out3.close();
+
+        ObjectInputStream in3 = new ObjectInputStream(new FileInputStream("out3.bin"));
+        ILibrary Lib3 = libr.SerInLib(in3, "ChildrenLibrary");
+        Lib3.print();
+        System.out.println("//////////////////////////////////");
+        in3.close();
+
 
 
 

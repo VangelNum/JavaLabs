@@ -1,6 +1,8 @@
-package lab6;
+package lab7;
 
-public interface IHall extends Cloneable {
+import java.io.Serializable;
+
+public interface IHall extends Cloneable, Serializable {
     public void setBooks(IBook[] books);
     public IBook getBook(int k);
 
