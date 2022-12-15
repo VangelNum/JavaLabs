@@ -9,11 +9,6 @@ public class Item2 {
         data = new ScientificLibraryHall(hallName, numBooks);
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
     public Item2(IHall l) {
         data = l;
         this.prev = null;

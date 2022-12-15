@@ -6,10 +6,9 @@ import java.util.Objects;
 
 public class ScientificLibraryHall implements IHall {
     private Item head;
-    private Item next;
     String hallName;
 
-    public String getName() {
+    public String getHallName() {
         return hallName;
     }
 
@@ -197,9 +196,10 @@ public class ScientificLibraryHall implements IHall {
     }
 
 
+
     @Override
     public void print() {
-        System.out.println(getName());
+        System.out.println(getHallName());
         Item temp = head;
         for (int i = 0; i < getNumberOfElements(); i++) {
             System.out.println(temp.data.getTitle());
@@ -265,7 +265,7 @@ public class ScientificLibraryHall implements IHall {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append("Тип зала: ").append(getName());
+        str.append("Тип зала: ").append(getHallName());
         str.append(" Количество книг: ").append(getNumberOfElements());
         str.append(" Информация по каждой книге: ").append(printAllBooks());
         return str.toString();
@@ -291,20 +291,19 @@ public class ScientificLibraryHall implements IHall {
 
     }
 
-
+    @Override
     public Object clone() {
-
         Object result = null;
         try {
             result = super.clone();
-            ((ScientificLibraryHall) result).head = (Item) head.clone();
-            ((ScientificLibraryHall) result).next = (Item) next.clone();
-            for (int i = 0; i < numbersBooks(); i++) {
-                ((ScientificLibraryHall) result).izmenenie(i, (IBook) getBook(i).clone());
+            ((ScientificLibraryHall) result).head = null;
+
+
+            for (int i = 0; i < getNumberOfElements(); i++) {
+                ((ScientificLibraryHall) result).dobavBook(i, (IBook) getBook(i).clone());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        }catch (Exception e){}
         return result;
     }
+
 }

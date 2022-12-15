@@ -58,9 +58,7 @@ public class ScientificBook extends Book {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        Object result = null;
-        result = super.clone();
-        return result;
+    public Object clone() {
+        return super.clone();
     }
 }

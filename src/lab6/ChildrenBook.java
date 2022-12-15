@@ -3,9 +3,9 @@ package lab6;
 import java.util.Objects;
 
 public class ChildrenBook extends Book {
-    private double vozr;
+    private int vozr;
 
-    public double getVozr() {
+    public int getVozr() {
         return vozr;
     }
 
@@ -60,7 +60,7 @@ public class ChildrenBook extends Book {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone(){
         Object result = null;
         result = super.clone();
         return result;

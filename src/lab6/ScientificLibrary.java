@@ -96,6 +96,7 @@ public class ScientificLibrary implements ILibrary {
 
     public int getNumHall(IHall hall) {
         int numBook = 0;
+        System.out.println("1234");
         Item2 temp = head;
         for (int i = 0; i < hall.numbersBooks(); i++) {
             numBook += temp.data.numbersBooks();
@@ -125,7 +126,7 @@ public class ScientificLibrary implements ILibrary {
     }
 
     public IHall getHall(int i) {
-        return new ScientificLibraryHall(getLinkToHall(i).data.getName(), getLinkToHall(i).data.numbersBooks());
+        return new ScientificLibraryHall(getLinkToHall(i).data.getHallName(), getLinkToHall(i).data.numbersBooks());
     }
 
     public IBook getBook(int i) {
@@ -250,7 +251,7 @@ public class ScientificLibrary implements ILibrary {
     public void print() {
         Item2 item2 = head;
         for (int i = 0; i < getNumHall(); i++) {
-            System.out.println("Name hall: " + item2.data.getName() + ", number of books = " + item2.data.numbersBooks());
+            System.out.println("Name hall: " + item2.data.getHallName() + ", number of books = " + item2.data.numbersBooks());
             item2 = item2.next;
         }
     }
@@ -259,7 +260,7 @@ public class ScientificLibrary implements ILibrary {
         StringBuilder str = new StringBuilder();
         Item2 item2 = head;
         for (int i = 0; i < getNumHall(); i++) {
-            str.append(" Название зала: ").append(item2.data.getName());
+            str.append(" Название зала: ").append(item2.data.getHallName());
             str.append("Количество книг: ").append(item2.data.numbersBooks());
             item2 = item2.next;
         }
@@ -364,18 +365,15 @@ public class ScientificLibrary implements ILibrary {
     @Override
     public Object clone(){
         Object result = null;
-
         try {
             result = super.clone();
-            ((ScientificLibrary) result).head = (Item2) head.clone();
+            ((ScientificLibrary) result).head = null;
             for (int i = 0; i < getNumHall(); i++) {
-                ((ScientificLibrary) result).zamenaHoll(i, (IHall) getHall(i).clone());
+                ((ScientificLibrary) result).addHall(i, (IHall) getHall(i).clone());
             }
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
         return result;
     }
-
-
 }

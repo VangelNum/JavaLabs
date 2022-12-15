@@ -4,7 +4,7 @@ public interface IHall extends Cloneable {
     public void setBooks(IBook[] books);
     public IBook getBook(int k);
 
-    public String getName();
+    public String getHallName();
 
     public void setName(String name);
 
@@ -23,4 +23,6 @@ public interface IHall extends Cloneable {
     public void delete(int k);
 
     public Object clone() throws CloneNotSupportedException;
+
+
 }

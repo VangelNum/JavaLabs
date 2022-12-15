@@ -13,7 +13,7 @@ public class ChildrenLibraryHall implements IHall {
         this.books = books;
     }
 
-    public String getName() {
+    public String getHallName() {
         return name;
     }
 
@@ -150,7 +150,7 @@ public class ChildrenLibraryHall implements IHall {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append("Тип зала: ").append(getName());
+        str.append("Тип зала: ").append(getHallName());
         str.append(" Количество книг: ").append(getNumBook());
         str.append(" Информация по каждой книге: ").append(Arrays.toString(getBooks()));
         return str.toString();
@@ -158,7 +158,7 @@ public class ChildrenLibraryHall implements IHall {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(getName());
+        int result = Objects.hash(getHallName());
         result = 31 * result + Arrays.hashCode(getBooks());
         return result;
     }
@@ -176,6 +176,8 @@ public class ChildrenLibraryHall implements IHall {
         } else return false;
 
     }
+
+    @Override
     public Object clone(){
         Object result = null;
         try

@@ -136,8 +136,14 @@ public class ChildrenLibrary implements ILibrary {
 
     public void print() {
         StringBuilder str = new StringBuilder("");
+        String str1 = "";
         for (int i = 0; i < getNumHall(); i++) {
-            str.append(libHall[i].getName()).append(libHall[i].numbersBooks());
+            str.append(libHall[i].getHallName()).append(" ").append(libHall[i].numbersBooks());
+            str1 = "Название зала: " + libHall[i].getHallName() + " Количество книг: " + libHall[i].numbersBooks();
+            for (int j = 0;j<libHall[i].numbersBooks();j++) {
+                String str3 = (String.valueOf(libHall[i].getBook(j)));
+                System.out.println(str1 + " " + str3);
+            }
         }
     }
 
